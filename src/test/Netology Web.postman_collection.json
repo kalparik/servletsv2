@@ -1,0 +1,414 @@
+{
+	"info": {
+		"_postman_id": "9604a398-2cfb-4808-9084-3319d36ace54",
+		"name": "Netology Web",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9165319"
+	},
+	"item": [
+		{
+			"name": "web-servlets",
+			"item": [
+				{
+					"name": "get all",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"for (let i = 1; i < 10; i++) {",
+									"    const options = {",
+									"        url: `http://localhost:8080/api/posts/${i}`,",
+									"        method: 'DELETE'",
+									"    };",
+									"",
+									"    pm.sendRequest(options, function (err) {",
+									"        if (err) {",
+									"            console.error(err);",
+									"        }",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"for (let i = 1; i < 10; i++) {",
+									"    const options = {",
+									"        url: \"http://localhost:8080/api/posts\",",
+									"        method: 'POST',",
+									"        header: { 'content-type': 'application/json' },",
+									"        body: {",
+									"            mode: 'raw',",
+									"            raw: JSON.stringify({\"id\": 0, \"content\": `Post ${i}: smth here`})",
+									"",
+									"        }",
+									"    };",
+									"",
+									"    pm.sendRequest(options, function (err, res) {",
+									"        var jsonData = res.json();",
+									"        console.info(jsonData)",
+									"        if (err) {",
+									"            console.error(err);",
+									"        }",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"for (let i = 1; i < 3; i++) {",
+									"    const options = {",
+									"        url: `http://localhost:8080/api/posts/${i}`,",
+									"        method: 'DELETE'",
+									"    };",
+									"",
+									"    pm.sendRequest(options, function (err) {",
+									"        if (err) {",
+									"            console.error(err);",
+									"        }",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"for (let i = 1; i < 3; i++) {",
+									"    const options = {",
+									"        url: \"http://localhost:8080/api/posts\",",
+									"        method: 'POST',",
+									"        header: { 'content-type': 'application/json' },",
+									"        body: {",
+									"            mode: 'raw',",
+									"            raw: JSON.stringify({\"id\": 0, \"content\": `Post ${i}: smth here`})",
+									"",
+									"        }",
+									"    };",
+									"",
+									"    pm.sendRequest(options, function (err, res) {",
+									"        var jsonData = res.json();",
+									"        console.info(jsonData)",
+									"        if (err) {",
+									"            console.error(err);",
+									"        }",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"for (let i = 1; i < 3; i++) {",
+									"    const options = {",
+									"        url: \"http://localhost:8080/api/posts\",",
+									"        method: 'POST',",
+									"        header: { 'content-type': 'application/json' },",
+									"        body: {",
+									"            mode: 'raw',",
+									"            raw: JSON.stringify({\"id\": 0, \"content\": `Post ${i}: smth here`})",
+									"",
+									"        }",
+									"    };",
+									"",
+									"    pm.sendRequest(options, function (err, res) {",
+									"        var jsonData = res.json();",
+									"        console.info(jsonData)",
+									"        if (err) {",
+									"            console.error(err);",
+									"        }",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const options = {",
+									"    url: \"http://localhost:8080/api/posts/2\",",
+									"    method: 'DELETE'",
+									"};",
+									"",
+									"pm.sendRequest(options, function (err) {",
+									"    if (err) {",
+									"        console.error(err);",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save new",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const options = {",
+									"    url: `http://localhost:8080/api/posts/1`,",
+									"    method: 'DELETE'",
+									"};",
+									"",
+									"pm.sendRequest(options, function (err) {",
+									"    if (err) {",
+									"        console.error(err);",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 0,\n  \"content\": \"Post 1. Hello everybody! Good news!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"for (let i = 1; i < 3; i++) {",
+									"    const options = {",
+									"        url: \"http://localhost:8080/api/posts\",",
+									"        method: 'POST',",
+									"        header: { 'content-type': 'application/json' },",
+									"        body: {",
+									"            mode: 'raw',",
+									"            raw: JSON.stringify({\"id\": 0, \"content\": `Post ${i}: smth here`})",
+									"",
+									"        }",
+									"    };",
+									"",
+									"    pm.sendRequest(options, function (err, res) {",
+									"        var jsonData = res.json();",
+									"        console.info(jsonData)",
+									"        if (err) {",
+									"            console.error(err);",
+									"        }",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Your test name\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData)",
+									"    pm.expect(jsonData.content).to.eql(\"Post 1. Hello everybody! Good news!\");",
+									"});",
+									"",
+									"for (let i = 1; i < 3; i++) {",
+									"    const options = {",
+									"        url: `http://localhost:8080/api/posts/${i}`,",
+									"        method: 'DELETE'",
+									"    };",
+									"",
+									"    pm.sendRequest(options, function (err) {",
+									"        if (err) {",
+									"            console.error(err);",
+									"        }",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"content\": \"Post 1. Hello everybody! Good news!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
